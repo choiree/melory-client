@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { saveLoginUser } from '../../features/user/userSlice';
 const axios = require('axios');
 
 export default function useAuth(code) {
   const [accessToken, setAccessToken] = useState();
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
+  const [jwtAccessToken, setJwtAccessToken] = useState();
+  const [email, setEmail] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     axios
@@ -15,6 +20,9 @@ export default function useAuth(code) {
         setAccessToken(res.data.accessToken);
         setRefreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);
+        setJwtAccessToken(res.data.jwtAccessToken);
+        setEmail(res.data.email);
+        // dispatch(saveLoginUser(res.data.email));
         window.history.pushState({}, null, '/');
       })
       .catch(() => {
@@ -44,6 +52,11 @@ export default function useAuth(code) {
     };
   }, [refreshToken, expiresIn]);
 
-  axios.defaults.headers.common['Authorization'] = accessToken;
-  return accessToken;
+  // axios.defaults.headers.common['Authorization'] = accessToken;
+
+  return {
+    accessToken,
+    jwtAccessToken,
+    email,
+  };
 }
