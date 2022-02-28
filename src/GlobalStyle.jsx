@@ -5,6 +5,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   *, *::before, *::after {
+    margin: 0;
     box-sizing: border-box;
   }
 
@@ -25,6 +26,11 @@ const GlobalStyle = createGlobalStyle`
 
   p {
     font-size: 1rem;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
   }
 `;
 
