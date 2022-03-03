@@ -8,6 +8,7 @@ import { Gallery } from './components/Gallery/Gallery';
 import { Visualization } from './components/Visualization/Visualization';
 import { Emoji } from './components/Emoji/Emoji';
 import { Image } from './components/Image/Image';
+import { MusicSelection } from './components/Music/MusicSelection';
 
 function App() {
   return (

@@ -25,3 +25,17 @@ export async function getUserGallery(token, email) {
 
   return response.data;
 }
+
+export async function savePhoto(token, email, photoInfo) {
+  const response = await axios.post(
+    `${process.env.REACT_APP_BASE_URL}/user/${email}/gallery`,
+    photoInfo,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  return response.data;
+}
