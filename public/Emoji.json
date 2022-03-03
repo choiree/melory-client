@@ -1,0 +1,187 @@
+[
+  {
+    "content": "😘",
+    "genre": "romance",
+    "valence": 0.7
+  },
+  {
+    "content": "🥰",
+    "genre": "romance",
+    "valence": 0.8
+  },
+  {
+    "content": "😍",
+    "genre": "romance",
+    "valence": 0.9
+  },
+  {
+    "content": "🎧",
+    "genre": "acoustic",
+    "valence": 0.5
+  },
+  {
+    "content": "🧸",
+    "genre": "children",
+    "valence": 0.7
+  },
+  {
+    "content": "🎻",
+    "genre": "classical",
+    "valence": 0.5
+  },
+  {
+    "content": "🔥",
+    "genre": "club",
+    "valence": 1
+  },
+  {
+    "content": "💃",
+    "genre": "dance",
+    "valence": 1
+  },
+  {
+    "content": "🤖",
+    "genre": "electronic",
+    "valence": 1
+  },
+  {
+    "content": "🕺",
+    "genre": "groove",
+    "valence": 0.5
+  },
+  {
+    "content": "🙂",
+    "genre": "happy",
+    "valence": 0.8
+  },
+  {
+    "content": "😊",
+    "genre": "happy",
+    "valence": 0.9
+  },
+  {
+    "content": "😆",
+    "genre": "happy",
+    "valence": 1
+  },
+  {
+    "content": "🎸",
+    "genre": "guitar",
+    "valence": 0.7
+  },
+  {
+    "content": "🎬",
+    "genre": "movies",
+    "valence": 0.5
+  },
+  {
+    "content": "🇰🇷",
+    "genre": "k-pop",
+    "valence": 0.8
+  },
+  {
+    "content": "🥳",
+    "genre": "party",
+    "valence": 0.8
+  },
+  {
+    "content": "🎉",
+    "genre": "party",
+    "valence": 0.9
+  },
+  {
+    "content": "🎹",
+    "genre": "piano",
+    "valence": 0.4
+  },
+  {
+    "content": "🌎",
+    "genre": "pop",
+    "valence": 0.7
+  },
+  {
+    "content": "📼",
+    "genre": "anime",
+    "valence": 0.6
+  },
+  {
+    "content": "😎",
+    "genre": "r-n-b",
+    "valence": 0.6
+  },
+  {
+    "content": "☔️",
+    "genre": "☔️",
+    "valence": 0.4
+  },
+  {
+    "content": "👩🏽‍🦱",
+    "genre": "reggae",
+    "valence": 0.7
+  },
+  {
+    "content": "✈️",
+    "genre": "road-trip",
+    "valence": 0.8
+  },
+  {
+    "content": "🥲",
+    "genre": "sad",
+    "valence": 0.3
+  },
+  {
+    "content": "😢",
+    "genre": "sad",
+    "valence": 0.2
+  },
+  {
+    "content": "😭",
+    "genre": "sad",
+    "valence": 0.1
+  },
+  {
+    "content": "🥱",
+    "genre": "sleep",
+    "valence": 0.4
+  },
+  {
+    "content": "😴",
+    "genre": "sleep",
+    "valence": 0.5
+  },
+  {
+    "content": "✏️",
+    "genre": "study",
+    "valence": 0.5
+  },
+  {
+    "content": "💰",
+    "genre": "hip-hop",
+    "valence": 0.7
+  },
+  {
+    "content": "🌤",
+    "genre": "summer",
+    "valence": 0.6
+  },
+  {
+    "content": "☀️",
+    "genre": "summer",
+    "valence": 0.7
+  },
+  {
+    "content": "👯‍♀️",
+    "genre": "holidays",
+    "valence": 0.8
+  },
+  {
+    "content": "🎙",
+    "genre": "indie",
+    "valence": 0.5
+  },
+  {
+    "content": "🎷",
+    "genre": "jazz",
+    "valence": 0.5
+  }
+]

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { getUserInfo } from '../../api/user';
 import { saveLoginUser } from '../../features/user/userSlice';
+import { Loading } from '../Loading/Loading';
 import { Login } from '../Login/Login';
 import useAuth from './useAuth';
 
