@@ -7,19 +7,19 @@ import findGenres from '../../utils/findGenres';
 import { MusicSelection } from '../Music/MusicSelection';
 import { getDevices, getPlaybackState, pause } from '../../api/spotify';
 
-const ImageBackground = styled.div`
+const ImageContainer = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #2b3255;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   flex-direction: column;
   color: white;
 
   .box {
     width: 800px;
-    height: 650px;
+    height: 600px;
     background-color: white;
     display: flex;
     justify-content: center;
@@ -34,7 +34,6 @@ const ImageBackground = styled.div`
 
     canvas {
       position: absolute;
-      border: 5px solid pink;
     }
   }
 
@@ -43,17 +42,28 @@ const ImageBackground = styled.div`
     color: #2b3255;
   }
 
-  button,
+  .btn-container {
+    margin-bottom: 7%;
+  }
+
+  .search-music,
   label {
     background: none;
     border: none;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
     padding: 8px 15px;
     margin: 10px 15px 0;
     border-radius: 5px;
     font-size: 16px;
     color: white;
     cursor: pointer;
+  }
+
+  .search-music {
+    &:disabled {
+      cursor: auto;
+      color: #2b3255;
+    }
   }
 
   .upload-name {
@@ -188,7 +198,7 @@ export const Image = () => {
   };
 
   return (
-    <ImageBackground>
+    <ImageContainer>
       {showAlert ? (
         <div>업로드 진행률: {progress}%</div>
       ) : (
@@ -204,7 +214,7 @@ export const Image = () => {
           <i className="fas fa-solid fa-image" />
         )}
       </div>
-      <div>
+      <div className="btn-container">
         <label htmlFor="file">Upload</label>
         <input
           type="file"
@@ -213,6 +223,7 @@ export const Image = () => {
           onChange={handleFileInput}
         />
         <button
+          className="search-music"
           onClick={() => uploadFile(selectesFile)}
           disabled={selectesFile ? false : true}
         >
@@ -223,9 +234,9 @@ export const Image = () => {
         <MusicSelection
           genres={genre}
           imageUrl={imageUrl}
-          setImageUrl={setImageUrl}
+          closeMusicSelection={setImageUrl}
         />
       )}
-    </ImageBackground>
+    </ImageContainer>
   );
 };
