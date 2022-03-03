@@ -4,6 +4,8 @@ import AWS from 'aws-sdk';
 import * as faceapi from 'face-api.js';
 import findExpression from '../../utils/findExpression';
 import findGenres from '../../utils/findGenres';
+import { MusicSelection } from '../Music/MusicSelection';
+import { getDevices, getPlaybackState, pause } from '../../api/spotify';
 
 const ImageBackground = styled.div`
   width: 100vw;
@@ -47,7 +49,7 @@ const ImageBackground = styled.div`
     border: none;
     background: rgba(255, 255, 255, 0.5);
     padding: 8px 15px;
-    margin: 10px 15px;
+    margin: 10px 15px 0;
     border-radius: 5px;
     font-size: 16px;
     color: white;
@@ -79,7 +81,8 @@ export const Image = () => {
   const [selectesFile, setSelectedFile] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
-  const [imageUrl, setImageUrl] = useState(null);
+  const [imageUrl, setImageUrl] = useState('');
+  const [genre, setGenre] = useState({});
   const imgRef = useRef();
   const canvasRef = useRef();
 
@@ -91,8 +94,8 @@ export const Image = () => {
         .withFaceExpressions();
 
       const expressions = findExpression(detections);
-
-      console.log('장르결과', findGenres(expressions));
+      const genres = findGenres(expressions);
+      setGenre(genres);
 
       canvasRef.current.innerHtml = faceapi.createCanvasFromMedia(
         imgRef.current,
@@ -179,17 +182,10 @@ export const Image = () => {
         }, 3000);
       })
       .send((err, data) => {
-        console.log(456, data.Location);
         setImageUrl(data.Location);
         if (err) console.log(err);
       });
   };
-  //제일 큰 감정 두개 (수치랑 같이) 찾기 O
-  //음원 장르 찾는 유틸 함수 로직 작성하기(감정 넣으면 장르와 밸런스 값 리턴) O
-  //음원 찾는 API 작성하기(장르와 밸런스 값 넣으면 음원 리스트 리턴)
-  //장르와 밸런스값으로 음원 추천 API 요청하기
-  //받아온 음원리스트와 이미지 URL 과 함께 음원 선택 페이지로 보내주기
-  //음원 선택 페이지에서 음원 선택하고 DB에 저장하기
 
   return (
     <ImageBackground>
@@ -223,6 +219,13 @@ export const Image = () => {
           Search
         </button>
       </div>
+      {imageUrl && (
+        <MusicSelection
+          genres={genre}
+          imageUrl={imageUrl}
+          setImageUrl={setImageUrl}
+        />
+      )}
     </ImageBackground>
   );
 };
