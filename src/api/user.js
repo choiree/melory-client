@@ -39,3 +39,16 @@ export async function savePhoto(token, email, photoInfo) {
 
   return response.data;
 }
+
+export async function deletePhoto(token, email, photoId) {
+  const response = await axios.delete(
+    `${process.env.REACT_APP_BASE_URL}/user/${email}/gallery/${photoId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  return response.data;
+}

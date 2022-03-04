@@ -38,6 +38,7 @@ const MusicBackground = styled.div`
 export const MusicSelection = ({
   genres,
   imageUrl,
+  s3Key,
   closeMusicSelection,
   setSelectEmoji,
   setSelectEmoji2,
@@ -72,9 +73,10 @@ export const MusicSelection = ({
     const photoInfo = {
       type,
       imageUrl,
+      s3Key,
       musicUrl: selectedMusic.uri,
       artist: selectedMusic.artists[0].name,
-      album: selectedMusic.album.images[2].url,
+      album: selectedMusic.album.images[1].url,
       title: selectedMusic.name,
       genre,
     };
@@ -116,6 +118,7 @@ MusicSelection.propTypes = {
   genres: proptypes.object.isRequired,
   imageUrl: proptypes.string.isRequired,
   closeMusicSelection: proptypes.func.isRequired,
+  s3Key: proptypes.string,
   setSelectEmoji: proptypes.func,
   setSelectEmoji2: proptypes.func,
 };
