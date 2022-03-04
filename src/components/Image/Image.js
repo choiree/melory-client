@@ -92,6 +92,7 @@ export const Image = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [previewImage, setPreviewImage] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
+  const [s3Key, setS3Key] = useState('');
   const [genre, setGenre] = useState({});
   const imgRef = useRef();
   const canvasRef = useRef();
@@ -192,6 +193,7 @@ export const Image = () => {
         }, 3000);
       })
       .send((err, data) => {
+        setS3Key(data.Key);
         setImageUrl(data.Location);
         if (err) console.log(err);
       });
@@ -234,6 +236,7 @@ export const Image = () => {
         <MusicSelection
           genres={genre}
           imageUrl={imageUrl}
+          s3Key={s3Key}
           closeMusicSelection={setImageUrl}
         />
       )}

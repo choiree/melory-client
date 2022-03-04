@@ -208,6 +208,7 @@ export const Emoji = () => {
             valence: (+selectEmoji[2] + +selectEmoji2[2]) / 2,
           }}
           imageUrl={selectEmoji[0] + selectEmoji2[0]}
+          s3Key={null}
           closeMusicSelection={setOpenMusicSelection}
           setSelectEmoji={setSelectEmoji}
           setSelectEmoji2={setSelectEmoji2}
