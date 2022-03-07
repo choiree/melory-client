@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { isOccurError } from '../../features/error/errorSlice';
 import { MusicSelection } from '../Music/MusicSelection';
 
 const EmojiContainer = styled.div`
@@ -72,6 +74,7 @@ const EmojiBox = styled.div`
 `;
 
 export const Emoji = () => {
+  const dispatch = useDispatch();
   const scrollRef = useRef(null);
   const [isDrag, setIsDrag] = useState(false);
   const [startX, setStartX] = useState();
@@ -117,10 +120,14 @@ export const Emoji = () => {
   };
 
   useEffect(async () => {
-    const res = await fetch('/Emoji.json');
-    const emojis = await res.json();
+    try {
+      const res = await fetch('/Emoji.json');
+      const emojis = await res.json();
 
-    setEmojiList(emojis);
+      setEmojiList(emojis);
+    } catch (err) {
+      dispatch(isOccurError(err.result.error));
+    }
   }, []);
 
   const handleEmojiClick = (e) => {

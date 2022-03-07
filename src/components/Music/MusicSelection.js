@@ -6,8 +6,9 @@ import { Player } from '../Player/Player';
 import { Track } from '../Track/Track';
 import Player2 from '../Player/Player2';
 import { savePhoto } from '../../api/user';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from '../Loading/Loading';
+import { isOccurError } from '../../features/error/errorSlice';
 
 const MusicBackground = styled.div`
   width: 100vw;
@@ -43,6 +44,7 @@ export const MusicSelection = ({
   setSelectEmoji,
   setSelectEmoji2,
 }) => {
+  const dispatch = useDispatch();
   const { genre, valence } = genres;
   const spotifyAccessToken = localStorage.getItem('spotiAccesstoken');
   const accessToken = localStorage.getItem('jwtAccessToken');
@@ -59,9 +61,17 @@ export const MusicSelection = ({
 
   useEffect(() => {
     const getPlaylist = async () => {
-      const response = await getRecommended(spotifyAccessToken, genre, valence);
+      try {
+        const response = await getRecommended(
+          spotifyAccessToken,
+          genre,
+          valence,
+        );
 
-      setPlaylist(response.tracks);
+        setPlaylist(response.tracks);
+      } catch (err) {
+        dispatch(isOccurError(err.result.error));
+      }
     };
 
     getPlaylist();
@@ -81,10 +91,15 @@ export const MusicSelection = ({
       genre,
     };
 
-    await savePhoto(accessToken, loginUser.email, photoInfo);
-    closeMusicSelection(null);
-    setSelectEmoji(null);
-    setSelectEmoji2(null);
+    try {
+      await savePhoto(accessToken, loginUser.email, photoInfo);
+
+      closeMusicSelection(null);
+      setSelectEmoji(null);
+      setSelectEmoji2(null);
+    } catch (err) {
+      dispatch(isOccurError(err.result.error));
+    }
   };
 
   return (

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import proptypes from 'prop-types';
 import styled from 'styled-components';
-import aws from 'aws-sdk';
 import Modal from '../Modal/Modal';
 import { useSelector } from 'react-redux';
 import { deletePhoto, getUserGallery } from '../../api/user';
+import { isOccurError } from '../../features/error/errorSlice';
+import { useDispatch } from 'react-redux';
 
 const PhotoCatainer = styled.div`
   line-height: 250px;
@@ -79,6 +80,7 @@ const HoverPhoto = styled.div`
 `;
 
 export const Photo = ({ info, playTrack, setGallery }) => {
+  const dispatch = useDispatch();
   const accessToken = localStorage.getItem('jwtAccessToken');
   const user = useSelector((state) => state.user);
   const [isHovering, setIsHovering] = useState(false);
@@ -103,7 +105,7 @@ export const Photo = ({ info, playTrack, setGallery }) => {
 
       setGallery(gallery);
     } catch (err) {
-      console.error(err);
+      dispatch(isOccurError(err.result.error));
     }
   };
 

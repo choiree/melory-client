@@ -6,6 +6,8 @@ import findExpression from '../../utils/findExpression';
 import findGenres from '../../utils/findGenres';
 import { MusicSelection } from '../Music/MusicSelection';
 import { getDevices, getPlaybackState, pause } from '../../api/spotify';
+import { useDispatch } from 'react-redux';
+import { isOccurError } from '../../features/error/errorSlice';
 
 const ImageContainer = styled.div`
   width: 100vw;
@@ -87,6 +89,7 @@ const ImageContainer = styled.div`
 `;
 
 export const Image = () => {
+  const dispatch = useDispatch();
   const [progress, setProgress] = useState(0);
   const [selectesFile, setSelectedFile] = useState(null);
   const [showAlert, setShowAlert] = useState(false);
@@ -123,6 +126,7 @@ export const Image = () => {
       faceapi.draw.drawFaceExpressions(canvasRef.current, resized);
       // faceapi.draw.drawFaceLandmarks(canvasRef.current, resized);
     };
+
     const loadModels = () => {
       Promise.all([
         faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
@@ -173,7 +177,7 @@ export const Image = () => {
     }
   };
 
-  const uploadFile = async (file) => {
+  const uploadFile = (file) => {
     const params = {
       ACL: 'public-read',
       Body: file,
@@ -195,7 +199,7 @@ export const Image = () => {
       .send((err, data) => {
         setS3Key(data.Key);
         setImageUrl(data.Location);
-        if (err) console.log(err);
+        if (err) dispatch(isOccurError(err.result.error));
       });
   };
 
