@@ -10,7 +10,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  z-index: 3;
+  z-index: 22;
 
   .logo {
     margin-bottom: -5px;
@@ -45,7 +45,7 @@ const Menu = styled.div`
   height: 100%;
   display: flex;
   right: 0;
-  z-index: 2;
+  z-index: 21;
   justify-content: center;
   align-items: center;
   flex-direction: column;

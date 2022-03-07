@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import proptypes from 'prop-types';
 import { getUserGallery } from '../../api/user';
-import Playe2 from '../../components/Player/Player2';
 import { Photo } from '../Photo/Photo';
+import { useDispatch } from 'react-redux';
+import { isOccurError } from '../../features/error/errorSlice';
 
 const GalleryContainer = styled.div`
   width: 100vw;
-  height: 100vh;
+  height: 95vh;
   background-color: #1e1e1e;
   overflow-y: scroll;
   display: flex;
   justify-content: center;
-  padding: 100px 0 55px 0;
+  padding: 100px 0 0;
 
   .player {
     width: 100vw;
@@ -31,19 +33,22 @@ const Photos = styled.div`
   align-items: center;
 `;
 
-export const Gallery = () => {
+export const Gallery = ({ setPlayTrack }) => {
+  const dispatch = useDispatch();
   const accessToken = localStorage.getItem('jwtAccessToken');
-  const spotifyAccessToken = localStorage.getItem('spotiAccesstoken');
-  const loginUser = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
   const [gallery, setGallery] = useState();
-  const [playTrack, setplayTrack] = useState(null);
 
   useEffect(async () => {
-    const response = await getUserGallery(accessToken, loginUser.email);
-    const { gallery } = response.result;
+    try {
+      const response = await getUserGallery(accessToken, user.email);
+      const { gallery } = response.result;
 
-    setGallery(gallery);
-  }, []);
+      setGallery(gallery);
+    } catch (err) {
+      dispatch(isOccurError(err.result.error));
+    }
+  }, [user]);
 
   return (
     <GalleryContainer>
@@ -53,15 +58,16 @@ export const Gallery = () => {
             <Photo
               info={photo}
               key={photo._id}
-              playTrack={setplayTrack}
+              playTrack={setPlayTrack}
               setGallery={setGallery}
             />
           );
         })}
       </Photos>
-      <div className="player">
-        <Playe2 accessToken={spotifyAccessToken} trackUri={playTrack} />
-      </div>
     </GalleryContainer>
   );
+};
+
+Gallery.propTypes = {
+  setPlayTrack: proptypes.func,
 };

@@ -52,3 +52,16 @@ export async function deletePhoto(token, email, photoId) {
 
   return response.data;
 }
+
+export async function getRandomMusic(token, email, genre) {
+  const response = await axios.get(
+    `${process.env.REACT_APP_BASE_URL}/user/${email}/gallery/${genre}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    },
+  );
+
+  return response.data;
+}

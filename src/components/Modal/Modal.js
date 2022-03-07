@@ -47,7 +47,7 @@ export const Modal = ({ onClose, children }) => {
       onClose();
     }
   };
-  console.log(children);
+
   return (
     <>
       <ModalOverlay />
