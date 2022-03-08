@@ -53,7 +53,6 @@ export const MusicSelection = ({
 
   const [playList, setPlaylist] = useState([]);
   const [playTrack, setplayTrack] = useState(playList[0]);
-  const [selectedMusic, setSelectedMusic] = useState();
 
   function chooseTrack(track) {
     setplayTrack(track);
@@ -79,15 +78,15 @@ export const MusicSelection = ({
     return () => getPlaylist;
   }, []);
 
-  const saveMusic = async () => {
+  const saveMusic = async (track) => {
     const photoInfo = {
       type,
       imageUrl,
       s3Key,
-      musicUrl: selectedMusic.uri,
-      artist: selectedMusic.artists[0].name,
-      album: selectedMusic.album.images[1].url,
-      title: selectedMusic.name,
+      musicUrl: track.uri,
+      artist: track.artists[0].name,
+      album: track.album.images[1].url,
+      title: track.name,
       genre,
     };
 
@@ -109,16 +108,13 @@ export const MusicSelection = ({
       ) : (
         <>
           <MusicBackground>
-            <button onClick={saveMusic} disabled={selectedMusic ? false : true}>
-              저장
-            </button>
             {playList &&
               playList.map((list) => (
                 <Track
                   key={list.uri}
                   track={list}
                   chooseTrack={chooseTrack}
-                  setSelectedMusic={setSelectedMusic}
+                  saveMusic={saveMusic}
                 />
               ))}
           </MusicBackground>
