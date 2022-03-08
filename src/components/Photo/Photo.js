@@ -64,6 +64,7 @@ const HoverPhoto = styled.div`
     position: absolute;
     color: #fff;
     top: 70px;
+    right: 41%;
   }
 
   button {

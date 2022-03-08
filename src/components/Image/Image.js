@@ -45,7 +45,7 @@ const ImageContainer = styled.div`
   }
 
   .btn-container {
-    margin-bottom: 7%;
+    margin-bottom: 4%;
   }
 
   .search-music,
