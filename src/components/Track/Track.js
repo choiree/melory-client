@@ -28,32 +28,60 @@ const Music = styled.div`
   }
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.3);
   }
 `;
 
-export const Track = ({ track, chooseTrack, setSelectedMusic }) => {
-  const handleClickTrack = () => {
+const ButtonBox = styled.div`
+  width: 110px;
+  position: absolute;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .btn {
+    &:hover {
+      background-color: #3c00ff;
+    }
+  }
+`;
+
+export const Track = ({ track, chooseTrack, saveMusic }) => {
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleClickTrack = (e) => {
+    e.stopPropagation();
     chooseTrack(track);
   };
 
-  const handleChecked = () => {
-    setSelectedMusic(track);
-  };
-
   return (
-    <Music key={track.uri} data-track={track} onClick={handleClickTrack}>
+    <Music
+      key={track.uri}
+      data-track={track}
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
       <img src={track.album.images[2].url} />
       <div>
         <div>{track.name}</div>
         <div className="artist">{track.artists[0].name}</div>
       </div>
-      <input
-        type="radio"
-        id={track.uri}
-        name="music"
-        onChange={handleChecked}
-      ></input>
+      {isHovering && (
+        <ButtonBox>
+          <button
+            className="btn"
+            onClick={() => {
+              saveMusic(track);
+            }}
+          >
+            저장
+          </button>
+          <button className="btn" onClick={handleClickTrack}>
+            재생
+          </button>
+        </ButtonBox>
+      )}
     </Music>
   );
 };
@@ -61,5 +89,5 @@ export const Track = ({ track, chooseTrack, setSelectedMusic }) => {
 Track.propTypes = {
   track: proptypes.object,
   chooseTrack: proptypes.func,
-  setSelectedMusic: proptypes.func,
+  saveMusic: proptypes.func,
 };

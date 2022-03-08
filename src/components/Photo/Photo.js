@@ -59,18 +59,31 @@ const HoverPhoto = styled.div`
     white-space: nowrap;
   }
 
-  .fa-caret-right {
-    font-size: 70px;
+  .playBtn {
+    width: 45px;
+    height: 45px;
+    padding: 5px;
     position: absolute;
-    color: #fff;
-    top: 70px;
-    right: 41%;
+    top: 88px;
+    right: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 40px;
+    background-color: rgba(255, 13, 0, 0.7);
+
+    i {
+      margin-left: 5px;
+      color: #f5f5ff;
+    }
   }
 
   button {
     position: absolute;
     top: 8px;
     right: 8px;
+    padding: 3px 7px 2px;
     font-size: 13px;
     color: white;
     border: none;
@@ -121,11 +134,13 @@ export const Photo = ({ info, playTrack, setGallery }) => {
           <img src={info.album} />
           <div className="title">{info.title}</div>
           <div>{info.artist}</div>
-          <i
-            className="fas fa-solid fa-caret-right"
-            onClick={handleClickPlayBtn}
-            data-url={info.musicUrl}
-          />
+          <div className="playBtn">
+            <i
+              className="fas fa-solid fa-caret-right"
+              onClick={handleClickPlayBtn}
+              data-url={info.musicUrl}
+            />
+          </div>
           <button onClick={handleClickDeleteBtn}>삭제</button>
         </HoverPhoto>
       )}
@@ -150,11 +165,13 @@ export const Photo = ({ info, playTrack, setGallery }) => {
           <img src={info.album} />
           <div className="title">{info.title}</div>
           <div>{info.artist}</div>
-          <i
-            className="fas fa-solid fa-caret-right"
-            onClick={handleClickPlayBtn}
-            data-url={info.musicUrl}
-          />
+          <div className="playBtn">
+            <i
+              className="fas fa-solid fa-caret-right"
+              onClick={handleClickPlayBtn}
+              data-url={info.musicUrl}
+            />
+          </div>
           <button onClick={handleClickDeleteBtn}>삭제</button>
         </HoverPhoto>
       )}
