@@ -4,54 +4,21 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import getSortedGenre from '../../utils/getSortedGenre';
 import { getRandomMusic, getUserGallery } from '../../api/user';
-import Player2 from '../Player/Player2';
 import proptypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { isOccurError } from '../../features/error/errorSlice';
+import { COLORLIST } from '../../constants';
 
 const Container = styled.div`
   width: 100vw;
   height: 95vh;
   background-color: black;
   overflow-y: hidden;
+
+  svg {
+    cursor: pointer;
+  }
 `;
-
-const mock = [
-  { name: 'r-n-b', count: 9 },
-  { name: 'summer', count: 1 },
-  { name: 'sad', count: 2 },
-  { name: 'movies', count: 3 },
-  { name: 'party', count: 1 },
-  { name: 'children', count: 1 },
-  { name: 'hip-hop', count: 1 },
-  { name: 'study', count: 1 },
-  { name: 'happy', count: 3 },
-  { name: 'sleep', count: 1 },
-  { name: 'electronic', count: 1 },
-  { name: 'acoustic', count: 1 },
-  { name: 'romance', count: 1 },
-  { name: 'rainy-day', count: 1 },
-];
-
-const colorList = [
-  '#32a852',
-  '#ff00d0',
-  '#0004ff',
-  '#fffb00',
-  '#00fff7',
-  '#bb00ff',
-  '#eb0286',
-  '#ff1100',
-  '#6302eb',
-  '#eb025b',
-  '#5beb02',
-  '#02eb86',
-  '#eb4402',
-  '#029deb',
-  '#cceb02',
-  '#1d164d',
-  '#dbff63',
-];
 
 export const Visualization = ({ setPlayTrack }) => {
   const dispatch = useDispatch();
@@ -94,15 +61,15 @@ export const Visualization = ({ setPlayTrack }) => {
       .data(data)
       .join('g')
       .attr('fill', () => {
-        const index = Math.floor(Math.random() * colorList.length);
+        const index = Math.floor(Math.random() * COLORLIST.length);
 
-        return colorList[index];
+        return COLORLIST[index];
       })
       .attr(
         'transform',
         (d) =>
-          `translate(${d.count * 30 + Math.random() * 1000},${
-            d.count * 30 + Math.random() * 500
+          `translate(${d.count * 30 + Math.random() * 1200},${
+            d.count * 30 + Math.random() * 600
           })`,
       )
       // .on('mouseleave', function () {
@@ -140,13 +107,20 @@ export const Visualization = ({ setPlayTrack }) => {
             ) {
               moveX = fullWidth / 2;
             }
+
             return `translate(${moveX},${moveY})`;
           });
       });
 
     leaf
       .append('circle')
-      .attr('r', (d) => d.count * 30)
+      .attr('r', (d) => {
+        if (d.count === 1) {
+          return d.count * 30;
+        }
+
+        return d.count * 16;
+      })
       .attr('fill-opacity', 0.8)
       .on('mouseenter', function () {
         d3.select(this)

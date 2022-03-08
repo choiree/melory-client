@@ -20,7 +20,7 @@ const EmojiContainer = styled.div`
 `;
 
 const SearchBtn = styled.button`
-  margin: 15px 0 8%;
+  margin: 15px 0 5%;
   border: none;
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.7);
@@ -84,41 +84,6 @@ export const Emoji = () => {
   const [emojiList, setEmojiList] = useState([]);
   const [openMusicSelection, setOpenMusicSelection] = useState(false);
 
-  const onDragStart = (e) => {
-    console.log('드래그 시작');
-
-    e.preventDefault();
-    setIsDrag(true);
-    setStartX(e.pageX + scrollRef.current.scrollLeft);
-  };
-
-  const onDragEnd = () => {
-    console.log('드래그 끝');
-    setIsDrag(false);
-  };
-
-  const onDragMove = (e) => {
-    if (isDrag) {
-      const { scrollWidth, clientWidth, scrollLeft } = scrollRef.current;
-      console.log('scrollWidth', scrollWidth, scrollLeft);
-      console.log(
-        'clientWidth',
-        clientWidth + scrollLeft,
-        e.pageX,
-        startX - e.pageX,
-      );
-
-      scrollRef.current.scrollLeft = startX - e.pageX;
-
-      if (scrollLeft === 0) {
-        console.log('scrollLeft 가 0일때', e.pageX);
-        setStartX(e.pageX);
-      } else if (scrollWidth === clientWidth + scrollLeft) {
-        setStartX(e.pageX + scrollLeft);
-      }
-    }
-  };
-
   useEffect(async () => {
     try {
       const res = await fetch('/Emoji.json');
@@ -129,6 +94,33 @@ export const Emoji = () => {
       dispatch(isOccurError(err.result.error));
     }
   }, []);
+
+  const onDragStart = (e) => {
+    e.preventDefault();
+    setIsDrag(true);
+    setStartX(e.pageX + scrollRef.current.scrollLeft);
+  };
+
+  const onDragEnd = (e) => {
+    e.stopPropagation();
+    setIsDrag(false);
+  };
+
+  const onDragMove = (e) => {
+    e.stopPropagation();
+
+    if (isDrag) {
+      const { scrollWidth, clientWidth, scrollLeft } = scrollRef.current;
+
+      scrollRef.current.scrollLeft = startX - e.pageX;
+
+      if (scrollLeft === 0) {
+        setStartX(e.pageX);
+      } else if (scrollWidth === clientWidth + scrollLeft) {
+        setStartX(e.pageX + scrollLeft);
+      }
+    }
+  };
 
   const handleEmojiClick = (e) => {
     if ((!selectEmoji && selectEmoji2) || (!selectEmoji && !selectEmoji2)) {
@@ -188,10 +180,9 @@ export const Emoji = () => {
       </SearchBtn>
       <EmojiSlide
         ref={scrollRef}
-        // onMouseDown={onDragStart}
-        // onMouseMove={onDragMove}
-        // onMouseUp={onDragEnd}
-        // onMouseLeave={onDragEnd}
+        onMouseDown={onDragStart}
+        onMouseMove={onDragMove}
+        onMouseUp={onDragEnd}
       >
         <EmojiBox>
           {emojiList.map((emoji) => {
