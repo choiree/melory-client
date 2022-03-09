@@ -60,7 +60,6 @@ export const Main = () => {
 
   if (code) {
     const token = useAuth(code);
-    console.log(123, token);
     const { accessToken, jwtAccessToken, email } = token;
 
     dispatch(saveLoginUser(email));
