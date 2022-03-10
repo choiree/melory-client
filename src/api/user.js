@@ -7,6 +7,7 @@ export async function getUserInfo(token) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      withCredentials: true,
     },
   );
 
@@ -20,6 +21,7 @@ export async function getUserGallery(token, email) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      withCredentials: true,
     },
   );
 
@@ -34,6 +36,7 @@ export async function savePhoto(token, email, photoInfo) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      withCredentials: true,
     },
   );
 
@@ -47,6 +50,7 @@ export async function deletePhoto(token, email, photoId) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      withCredentials: true,
     },
   );
 
@@ -60,6 +64,7 @@ export async function getRandomMusic(token, email, genre) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      withCredentials: true,
     },
   );
 
