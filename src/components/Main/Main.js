@@ -79,9 +79,9 @@ export const Main = () => {
       }
     };
 
-    if (accessToken !== 'undefined') {
-      userInfo();
-    }
+    userInfo();
+    // if (accessToken !== 'undefined') {
+    // }
   }, []);
 
   return accessToken ? (
