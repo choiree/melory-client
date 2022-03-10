@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { login } from '../../api/auth';
 import { getUserInfo } from '../../api/user';
 import { isOccurError } from '../../features/error/errorSlice';
 import { saveLoginUser } from '../../features/user/userSlice';
@@ -56,16 +57,40 @@ export const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const code = new URLSearchParams(window.location.search).get('code');
-  const accessToken = window.localStorage.getItem('jwtAccessToken');
-  console.log('여긴메인');
-  if (code) {
-    const token = useAuth(code);
-    const { accessToken, jwtAccessToken, email } = token;
-    console.log('👁useAuth 결과', token);
-    dispatch(saveLoginUser(email));
-    window.localStorage.setItem('spotiAccesstoken', accessToken);
-    window.localStorage.setItem('jwtAccessToken', jwtAccessToken);
-  }
+  let accessToken = window.localStorage.getItem('jwtAccessToken');
+
+  // if (code) {
+  //   // const token = useAuth(code);
+  //   // const { accessToken, jwtAccessToken, email } = token;
+  //   // console.log('👁useAuth 결과', token);
+  //   const a = async () => {
+  //     const res = await login(code);
+  //     const { accessToken, jwtAccessToken, email } = res;
+  //     console.log('👁', res);
+  //     dispatch(saveLoginUser(email));
+
+  //     window.localStorage.setItem('spotiAccesstoken', accessToken);
+  //     window.localStorage.setItem('jwtAccessToken', jwtAccessToken);
+  //     window.history.pushState({}, null, '/');
+  //   };
+  //   a();
+  // }
+
+  useEffect(() => {
+    if (!code) return;
+
+    const authorization = async () => {
+      const res = await login(code);
+      const { accessToken, jwtAccessToken, email } = res;
+
+      dispatch(saveLoginUser(email));
+      window.localStorage.setItem('spotiAccesstoken', accessToken);
+      window.localStorage.setItem('jwtAccessToken', jwtAccessToken);
+      navigate('/');
+    };
+
+    authorization();
+  }, [code]);
 
   useEffect(() => {
     const userInfo = async () => {
@@ -84,7 +109,7 @@ export const Main = () => {
     // }
   }, []);
 
-  return accessToken !== 'undefined' ? (
+  return accessToken ? (
     <MainWrapper>
       <MainLeft>
         <div
