@@ -18,7 +18,6 @@ export default function useAuth(code) {
         { withCredentials: true },
       )
       .then((res) => {
-        console.log('👁', res.data);
         setAccessToken(res.data.accessToken);
         setRefreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);
@@ -58,7 +57,6 @@ export default function useAuth(code) {
   }, [refreshToken, expiresIn]);
 
   // axios.defaults.headers.common['Authorization'] = accessToken;
-  console.log('👁22', accessToken, jwtAccessToken, email);
   return {
     accessToken,
     jwtAccessToken,

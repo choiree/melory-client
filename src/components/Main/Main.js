@@ -57,11 +57,11 @@ export const Main = () => {
   const navigate = useNavigate();
   const code = new URLSearchParams(window.location.search).get('code');
   const accessToken = window.localStorage.getItem('jwtAccessToken');
-
+  console.log('여긴메인');
   if (code) {
     const token = useAuth(code);
     const { accessToken, jwtAccessToken, email } = token;
-
+    console.log('👁useAuth 결과', token);
     dispatch(saveLoginUser(email));
     window.localStorage.setItem('spotiAccesstoken', accessToken);
     window.localStorage.setItem('jwtAccessToken', jwtAccessToken);
@@ -84,7 +84,7 @@ export const Main = () => {
     // }
   }, []);
 
-  return accessToken ? (
+  return accessToken !== 'undefined' ? (
     <MainWrapper>
       <MainLeft>
         <div
