@@ -18,6 +18,7 @@ export default function useAuth(code) {
         { withCredentials: true },
       )
       .then((res) => {
+        console.log('👍', res.data);
         setAccessToken(res.data.accessToken);
         setRefreshToken(res.data.refreshToken);
         setExpiresIn(res.data.expiresIn);
