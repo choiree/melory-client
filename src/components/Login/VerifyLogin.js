@@ -12,6 +12,8 @@ export const VerifyLogin = () => {
   useEffect(() => {
     const userInfo = async () => {
       try {
+        console.log('여긴 verify');
+
         const user = await getUserInfo(accessToken);
         const { email } = user.result;
 
