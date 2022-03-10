@@ -29,12 +29,6 @@ export default function useAuth(code) {
       .catch(() => {
         window.location = '/';
       });
-
-    return {
-      accessToken,
-      jwtAccessToken,
-      email,
-    };
   }, [code]);
 
   useEffect(() => {
