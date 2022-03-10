@@ -61,7 +61,7 @@ export const Main = () => {
   if (code) {
     const token = useAuth(code);
     const { accessToken, jwtAccessToken, email } = token;
-    console.log(token);
+    console.log(123, token);
     dispatch(saveLoginUser(email));
     window.localStorage.setItem('spotiAccesstoken', accessToken);
     window.localStorage.setItem('jwtAccessToken', jwtAccessToken);

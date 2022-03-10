@@ -10,9 +10,13 @@ export default function useAuth(code) {
 
   useEffect(() => {
     axios
-      .post(`${process.env.REACT_APP_BASE_URL}/auth/login`, {
-        code,
-      })
+      .post(
+        `${process.env.REACT_APP_BASE_URL}/auth/login`,
+        {
+          code,
+        },
+        { withCredentials: true },
+      )
       .then((res) => {
         console.log('👁', res.data);
         setAccessToken(res.data.accessToken);
@@ -32,9 +36,13 @@ export default function useAuth(code) {
 
     const interval = setInterval(() => {
       axios
-        .post(`${process.env.REACT_APP_BASE_URL}/auth/refresh`, {
-          refreshToken,
-        })
+        .post(
+          `${process.env.REACT_APP_BASE_URL}/auth/refresh`,
+          {
+            refreshToken,
+          },
+          { withCredentials: true },
+        )
         .then((res) => {
           setAccessToken(res.data.accessToken);
           setExpiresIn(res.data.expiresIn);
