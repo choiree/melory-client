@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function login(code) {
+export async function loginUser(code) {
   const response = await axios.post(
     `${process.env.REACT_APP_BASE_URL}/auth/login`,
     {
@@ -12,16 +12,14 @@ export async function login(code) {
   return response.data;
 }
 
-// export async function getUserGallery(token, email) {
-//   const response = await axios.get(
-//     `${process.env.REACT_APP_BASE_URL}/user/${email}/gallery`,
-//     {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     },
-//     { withCredentials: true },
-//   );
+export async function getNewAccessToken(refreshToken) {
+  const response = await axios.get(
+    `${process.env.REACT_APP_BASE_URL}/auth/refresh`,
+    {
+      refreshToken,
+    },
+    { withCredentials: true },
+  );
 
-//   return response.data;
-// }
+  return response.data;
+}

@@ -5,7 +5,6 @@ import * as faceapi from 'face-api.js';
 import findExpression from '../../utils/findExpression';
 import findGenres from '../../utils/findGenres';
 import { MusicSelection } from '../Music/MusicSelection';
-import { getDevices, getPlaybackState, pause } from '../../api/spotify';
 import { useDispatch } from 'react-redux';
 import { isOccurError } from '../../features/error/errorSlice';
 
@@ -124,7 +123,6 @@ export const Image = () => {
 
       faceapi.draw.drawDetections(canvasRef.current, resized);
       faceapi.draw.drawFaceExpressions(canvasRef.current, resized);
-      // faceapi.draw.drawFaceLandmarks(canvasRef.current, resized);
     };
 
     const loadModels = () => {

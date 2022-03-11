@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { Login } from './components/Login/Login';
 import { Main } from './components/Main/Main';
 import { Header } from './components/Header/Header';
@@ -8,10 +8,10 @@ import { Gallery } from './components/Gallery/Gallery';
 import { Visualization } from './components/Visualization/Visualization';
 import { Emoji } from './components/Emoji/Emoji';
 import { Image } from './components/Image/Image';
-import Player2 from './components/Player/Player2';
 import { NotFound } from './components/NotFound/NotFound';
 import { VerifyLogin } from './components/Login/VerifyLogin';
 import { useSelector } from 'react-redux';
+import Player from './components/Player/Player';
 
 function App() {
   const error = useSelector((state) => state.error);
@@ -44,7 +44,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
 
-      {isPlayer && <Player2 trackUri={playTrack} accessToken={accessToken} />}
+      {isPlayer && <Player trackUri={playTrack} accessToken={accessToken} />}
     </>
   );
 }
