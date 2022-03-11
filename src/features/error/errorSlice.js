@@ -15,9 +15,9 @@ export const errorSlice = createSlice({
       state.isError = true;
       state.message = errorMessage;
     },
-    // is: (state) => {
-    //   state.email = null;
-    // },
+    isDefaultError: (state) => {
+      state.email = null;
+    },
   },
 });
 

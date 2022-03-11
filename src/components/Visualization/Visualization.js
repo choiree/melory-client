@@ -39,14 +39,6 @@ export const Visualization = ({ setPlayTrack }) => {
     }
   }, [user]);
 
-  function randomColor(items) {
-    const index = Math.floor(Math.random() * items.length);
-    const color = items[index];
-    items.splice(index, 1);
-
-    return color;
-  }
-
   function createSvg() {
     return d3
       .select(el.current)
@@ -72,16 +64,6 @@ export const Visualization = ({ setPlayTrack }) => {
             d.count * 30 + Math.random() * 600
           })`,
       )
-      // .on('mouseleave', function () {
-      //   console.log('마우스 오버:', this);
-      //   d3.select(this)
-      //     .transition()
-      //     .duration(3000)
-      //     .attr('transform', (d) => {
-      //       console.log(d);
-      //       return `translate(${Math.random() * 1000},${Math.random() * 1000})`;
-      //     });
-      // })
       .on('mouseenter', function () {
         d3.select(this)
           .transition()

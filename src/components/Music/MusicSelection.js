@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import proptypes from 'prop-types';
 import styled from 'styled-components';
-import { getRecommended, pause } from '../../api/spotify';
-import { Player } from '../Player/Player';
+import { getRecommended } from '../../api/spotify';
+import Player from '../Player/Player';
 import { Track } from '../Track/Track';
-import Player2 from '../Player/Player2';
 import { savePhoto } from '../../api/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from '../Loading/Loading';
@@ -118,7 +117,7 @@ export const MusicSelection = ({
                 />
               ))}
           </MusicBackground>
-          <Player2 accessToken={spotifyAccessToken} trackUri={playTrack?.uri} />
+          <Player accessToken={spotifyAccessToken} trackUri={playTrack?.uri} />
         </>
       )}
     </>

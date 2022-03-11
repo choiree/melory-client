@@ -2,11 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { login } from '../../api/auth';
+import { loginUser } from '../../api/auth';
 import { getUserInfo } from '../../api/user';
 import { isOccurError } from '../../features/error/errorSlice';
 import { saveLoginUser } from '../../features/user/userSlice';
-import useAuth from './useAuth';
 
 const MainWrapper = styled.div`
   width: 100vw;
@@ -57,30 +56,13 @@ export const Main = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const code = new URLSearchParams(window.location.search).get('code');
-  let accessToken = window.localStorage.getItem('jwtAccessToken');
-
-  // if (code) {
-  //   // const token = useAuth(code);
-  //   // const { accessToken, jwtAccessToken, email } = token;
-  //   // console.log('👁useAuth 결과', token);
-  //   const a = async () => {
-  //     const res = await login(code);
-  //     const { accessToken, jwtAccessToken, email } = res;
-  //     console.log('👁', res);
-  //     dispatch(saveLoginUser(email));
-
-  //     window.localStorage.setItem('spotiAccesstoken', accessToken);
-  //     window.localStorage.setItem('jwtAccessToken', jwtAccessToken);
-  //     window.history.pushState({}, null, '/');
-  //   };
-  //   a();
-  // }
+  const accessToken = window.localStorage.getItem('jwtAccessToken');
 
   useEffect(() => {
     if (!code) return;
 
     const authorization = async () => {
-      const res = await login(code);
+      const res = await loginUser(code);
       const { accessToken, jwtAccessToken, email } = res;
 
       dispatch(saveLoginUser(email));
@@ -93,6 +75,8 @@ export const Main = () => {
   }, [code]);
 
   useEffect(() => {
+    if (!accessToken) return;
+
     const userInfo = async () => {
       try {
         const user = await getUserInfo(accessToken);
@@ -105,8 +89,6 @@ export const Main = () => {
     };
 
     userInfo();
-    // if (accessToken !== 'undefined') {
-    // }
   }, []);
 
   return accessToken ? (
