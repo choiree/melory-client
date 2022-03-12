@@ -51,9 +51,10 @@ export async function getPlaybackState(token) {
   return response.data;
 }
 
-export async function pause(token, deviceId) {
+export async function pause(token) {
   const response = await axios.put(
     `https://api.spotify.com/v1/me/player/pause`,
+    {},
     {
       headers: {
         Authorization: `Bearer ${token}`,
