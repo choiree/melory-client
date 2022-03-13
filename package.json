@@ -1,5 +1,5 @@
 {
-  "name": "melory-client",
+  "name": "melory",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -28,13 +28,20 @@
     "start": "concurrently \"npm run react:start\" \"npm run electron:start\"",
     "react:start": "react-scripts start",
     "build": "react-scripts build",
-    "electron:build": "npm run build && electron-builder --publish=always",
+    "electron:build": "npm run build && electron-builder --publish=never",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron": "electron .",
     "electron:start": "wait-on https://gracious-euclid-c4ba43.netlify.app && electron .",
-    "electron-pack": "npm run electron:build && electron-builder build -c.extraMetadata.main=build/Main.js",
+    "electron-pack": "npm run electron:build && electron-builder build -c.extraMetadata.main=build/electron.js",
+    "deploy:xos": "electron-builder --mac",
     "prepare": "husky install"
+  },
+  "build": {
+    "productName": "Melory",
+    "mac": {
+      "icon": "./public/images/icon.icns"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
