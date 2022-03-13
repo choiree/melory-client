@@ -52,7 +52,8 @@ const Menu = styled.div`
   font-family: 'Archivo Black', sans-serif;
   animation: ${openMenu} 0.4s ease;
 
-  div {
+  div,
+  a {
     font-size: 50px;
     margin: 12px 0;
     cursor: pointer;
@@ -140,6 +141,7 @@ export const Header = () => {
           >
             Visualization
           </div>
+          <a href="electron-fiddle://open">APPLICATION</a>
           <div
             onClick={() => {
               window.localStorage.clear();

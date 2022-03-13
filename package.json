@@ -43,6 +43,14 @@
       "icon": "./public/images/icon.icns"
     }
   },
+  "protocols": [
+    {
+      "name": "Electron Fiddle",
+      "schemes": [
+        "electron-fiddle"
+      ]
+    }
+  ],
   "eslintConfig": {
     "extends": "react-app"
   },
