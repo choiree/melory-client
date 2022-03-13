@@ -219,7 +219,6 @@ app.whenReady().then(() => {
   ]);
 
   tray.setToolTip('Melory~♥︎');
-  // tray.setPressedImage(path.join(__dirname, '/images/tray.png'));
   tray.setContextMenu(contextMenu);
 });
 
@@ -231,8 +230,8 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       plugins: true,
+      nodeIntegration: true,
     },
-    nodeIntegration: true,
   });
 
   mainWindow.webContents
@@ -242,15 +241,6 @@ function createWindow() {
     });
 
   mainWindow.loadURL('https://gracious-euclid-c4ba43.netlify.app/');
-
-  // if (process.env.mode === 'dev') {
-  //   mainWindow.loadURL('http://localhost:3000');
-  // } else {
-  //   mainWindow.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
-  //   mainWindow.loadFile(`${path.join(__dirname, '../build/index.html')}`);
-  // }
-
-  // mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(() => {

@@ -73,7 +73,7 @@ export const Visualization = ({ setPlayTrack }) => {
             const fullWidth = document.body.clientWidth;
             const fullHeight = document.body.clientHeight;
             const circleRadius = d.count * 30;
-            let moveX = circleRadius + Math.random() * 1500;
+            let moveX = circleRadius + Math.random() * 1200;
             let moveY = circleRadius + Math.random() * 800;
 
             if (
