@@ -1,5 +1,7 @@
 const { default: axios } = require('axios');
 const { app, BrowserWindow, Menu, Tray } = require('electron');
+const { shell } = require('electron/common');
+const { dialog } = require('electron/main');
 const path = require('path');
 
 app.commandLine.appendSwitch(
@@ -16,6 +18,12 @@ app.whenReady().then(() => {
   tray = new Tray(path.join(__dirname, '/images/note.png'));
 
   const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Melory',
+      click: () => {
+        shell.openExternal('https://gracious-euclid-c4ba43.netlify.app/');
+      },
+    },
     {
       label: '재생',
       click: async () => {
@@ -78,7 +86,6 @@ app.whenReady().then(() => {
       submenu: [
         {
           label: 'Happy',
-          type: 'radio',
           click: async () => {
             const device = await axios.get(
               `https://api.spotify.com/v1/me/player/devices`,
@@ -122,7 +129,6 @@ app.whenReady().then(() => {
         },
         {
           label: 'Sad',
-          type: 'radio',
           click: async () => {
             const device = await axios.get(
               `https://api.spotify.com/v1/me/player/devices`,
@@ -166,7 +172,6 @@ app.whenReady().then(() => {
         },
         {
           label: 'Mood',
-          type: 'radio',
           click: async () => {
             const device = await axios.get(
               `https://api.spotify.com/v1/me/player/devices`,
@@ -224,7 +229,7 @@ app.whenReady().then(() => {
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
-    width: 1000,
+    width: 900,
     height: 700,
     icon: path.join(__dirname, '/iamges/icon.icns'),
     webPreferences: {
@@ -241,6 +246,16 @@ function createWindow() {
     });
 
   mainWindow.loadURL('https://gracious-euclid-c4ba43.netlify.app/');
+
+  if (process.defaultApp) {
+    if (process.argv.length >= 2) {
+      app.setAsDefaultProtocolClient('electron-fiddle', process.execPath, [
+        path.resolve(process.argv[1]),
+      ]);
+    }
+  } else {
+    app.setAsDefaultProtocolClient('electron-fiddle');
+  }
 }
 
 app.whenReady().then(() => {
@@ -262,3 +277,7 @@ app.on(
     callback(true);
   },
 );
+
+app.on('open-url', (event, url) => {
+  dialog.showErrorBox('Welcome Back', `You arrived from: ${url}`);
+});
