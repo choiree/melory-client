@@ -21,7 +21,7 @@ app.whenReady().then(() => {
     {
       label: 'Melory',
       click: () => {
-        shell.openExternal('https://gracious-euclid-c4ba43.netlify.app/');
+        shell.openExternal('https://www.choiree.world');
       },
     },
     {
@@ -245,7 +245,7 @@ function createWindow() {
       acessToken = localStorage;
     });
 
-  mainWindow.loadURL('https://gracious-euclid-c4ba43.netlify.app/');
+  mainWindow.loadURL('https://www.choiree.world');
 
   if (process.defaultApp) {
     if (process.argv.length >= 2) {
