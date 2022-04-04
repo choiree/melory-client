@@ -77,6 +77,19 @@ $ npm run electron-pack
 $ npm run electron:start
 ```
 
+<details><summary> macOS에서 앱 다운로드 하는 법 ✅
+</summary>
+
+- 'npm run electron-pack'까지 실행 후 dist 폴더에서 'Melory-0.1.0.dmg' 파일 실행
+
+![title](https://user-images.githubusercontent.com/80485020/161477793-2b7f1f75-cf51-409b-89d8-4b09c681ca7d.png) ![title](https://user-images.githubusercontent.com/80485020/161477519-af71b4bb-4c8b-453c-8383-2b4df4d6dad8.png)
+
+- 파일 실행 시 다음과 같은 화면에서 애플리케이션 폴더로 이동
+
+![title](https://user-images.githubusercontent.com/80485020/161477788-89de75a0-4996-4e37-8e7b-948d1bb2fa18.png)
+
+</details>
+
 ## 작업 기간
 
 `2022년 2월 21일 ~ 2022년 3월 13일 (3주)`<br>
